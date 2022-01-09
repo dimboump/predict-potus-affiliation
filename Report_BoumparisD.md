@@ -44,3 +44,21 @@ When I downloaded the `csv` file, no speeches delivered by President Biden were 
 Luckily for me, the Miller Center's website provides all the basic info that I could include in the dataset. The key is to automate the process, instead of manually adding the info of the missing speeches.
 
 Given the limited space available in this Report, please take a look at how I went about doing this in the [`update_dataset_biden` notebook](https://github.com/user/repo/blob/dev/update_dataset_biden.ipynb).
+
+#### 1.2.3 Exploratory Data Analysis (EDA)
+
+Before we go ahead and start preprocessing our data (let alone building our models), we should always get a grasp of how the data is structured and briefly describe its main characteristics.
+
+The dataset includes every political affiliation that a President was elected in. That means, `unaffiliated`, `Federalist`, and `Whig` are also included. Initially, I though this could make a great multilabel classification task possible, but `speeches_all['Party'].value_counts()` showed that there is not enough data other than the two main parties:
+
+| Party                  | Speeches  |
+|----------------------- |---------: |
+| Democratic             |      489  |
+| Republican             |      389  |
+| Democratic-Republican  |       65  |
+| Unaffiliated           |       39  |
+| Whig                   |       12  |
+| Federalist             |        9  |
+| *Total*                |  *1,003*  |
+
+With that being said, I went ahead and dropped the speeches that were delivered by Presidents other that Democratic or Republican. Then, I concatenated the two sub-`DataFrames` into one. The task is now, therefore, a binary classficiation task.
