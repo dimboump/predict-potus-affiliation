@@ -16,3 +16,31 @@ The algorithms used are:
   * Dense Neural Network
   * Simple Recurrent Neural Network (RNN)
   * Long-Short Term Memory (LSTM) Neural Network
+
+### 1.2 Dataset
+
+#### 1.2.1 Origin and Description
+
+The data used for both training and testing are freely available via the [Miller Center](https://millercenter.org/the-presidency/presidential-speeches) website. Unfortunately, however, they do not provide a dataset in `CSV` form. Joseph Lilleberg scraped the data from the website and made them available in [`csv` on Kaggle](https://www.kaggle.com/littleotter/united-states-presidential-speeches). This dataset includes approximately 1000 famous speeches delivered by every POTUS since the days of George Washington until September 2020.
+
+The dataset is structured as such:
+
+| Field name      | Description                                        |
+|---------------- |--------------------------------------------------- |
+| `Date`          | The date the speech was delivered on (YYYY-MM-DD)  |
+| `President`     | The POTUS who delivered the speech                 |
+| `Party`         | The POTUS's political affiliation                  |
+| `Speech Title`  | A unique title for the speech                      |
+| `Summary`       | A brief description of the speech's topic          |
+| `Transcript`    | The full text of the speech                        |
+| `URL`           | The webpage the speech can be found on             |
+
+In the classification task, I only used the `Party` and `Transcript` columns.
+
+When I downloaded the `csv` file, no speeches delivered by President Biden were included. I had, therefore, to append them to the dataset. The next sub-section sheds a light on how I dealt with this.
+
+#### 1.2.2 Web Scraping Biden's Speeches
+
+Luckily for me, the Miller Center's website provides all the basic info that I could include in the dataset. The key is to automate the process, instead of manually adding the info of the missing speeches.
+
+Given the limited space available in this Report, please take a look at how I went about doing this in the [`update_dataset_biden` notebook](https://github.com/user/repo/blob/dev/update_dataset_biden.ipynb).
