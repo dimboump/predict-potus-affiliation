@@ -62,3 +62,15 @@ The dataset includes every political affiliation that a President was elected in
 | *Total*                |  *1,003*  |
 
 With that being said, I went ahead and dropped the speeches that were delivered by Presidents other that Democratic or Republican. Then, I concatenated the two sub-`DataFrames` into one. The task is now, therefore, a binary classficiation task.
+
+#### 1.2.4 Preprocessing
+
+Preprocessing is maybe the most tedious part of (Text) Data Analysis yet the most essential one. Without proper preprocessing, the models will not be able to perform to their best.
+
+In this project, preprocessing included:
+
+* __Removing punctuation__: Use of punctuation does not provide the algorithm with meaningful data, so we may exclude it from the data.
+* __Lowercasing and tokenizing text__: This step is important so casing does not result in idential words being treated as different ones.
+* __Removing stopwords__: This is done to avoid feeding the algorithms with high-frequency words that do not carry significant meaning (e.g. 'the', 'of', 'at', etc.).
+
+Vectorization, which usually comes after tokenization, is not done in the preprocessing phase, as I used different methods in the two types of algorithms.
