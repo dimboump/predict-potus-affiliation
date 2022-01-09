@@ -71,6 +71,8 @@ In this project, preprocessing included:
 
 * __Removing punctuation__: Use of punctuation does not provide the algorithm with meaningful data, so we may exclude it from the data.
 * __Lowercasing and tokenizing text__: This step is important so casing does not result in idential words being treated as different ones.
-* __Removing stopwords__: This is done to avoid feeding the algorithms with high-frequency words that do not carry significant meaning (e.g. 'the', 'of', 'at', etc.).
+* __Removing stopwords__: This is done to avoid feeding the algorithms with high-frequency words that do not carry significant meaning (e.g. 'the', 'of', 'at', etc.). The [Natural Language ToolKit (NLTK)](https://www.nltk.org/) provides us with a dictionary of stopwords in English, among other languages.
+* __Splitting the data__: We need to split our dataset into two subsets: training and testing. This way, we use the former to train the algorithms and the latter to test it on and evaluate its performance. The `train_test_split` function found in Scikit-Learn makes sure our data splitting is done randomly.
 
-Vectorization, which usually comes after tokenization, is not done in the preprocessing phase, as I used different methods in the two types of algorithms.
+Vectorization, which usually comes after tokenization, is not done in the preprocessing phase, as I used different methods for each of the two types of algorithms.
+
