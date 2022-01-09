@@ -76,3 +76,65 @@ In this project, preprocessing included:
 
 Vectorization, which usually comes after tokenization, is not done in the preprocessing phase, as I used different methods for each of the two types of algorithms.
 
+## 2 Algorithms: Implementation and Evaluation
+
+After having preprocessed the dataset, it is now time to start implementing the algorithms. In this section, we will briefly discuss the best hyperparapemeters used for each one along with its best scores.
+
+### 2.1 Classical Algorithms
+
+In all cases, the methodology includes:
+
+1. Make a pipeline with the algorithm of choice.
+2. Run a `GridSearchCV` with different parameters so the best model is selected.
+3. Train the data on the model with the best performing parameters.
+4. Test the model on test data.
+5. Run a 10-fold Cross Validation and plot the Confusion Matrix.
+
+#### 2.1.1 Logistic Regression
+
+The Logistic Regression algorithms performed relatively high, achieving an accuracy of 77.8%. Following a `GridSearchCV`, the best hyperparameters were:
+
+* `C`: 100
+* `Solver`: liblinear
+
+The model did not achieve excellent precision or recall in either classes, although it did perform better on Republican speeches (positive class):
+
+![Logistic Regression Confusion Matrix](img/classical__logreg_confusion_matrix.png)
+
+#### 2.1.2 Support Vector Machines (SVM)
+
+SVM is one of the most used algorithms to be used for, but limited to, text data. In my case, in particular, the model scored an accuracy of 79.5% -- slightly better than the previous one. Following a `GridSearchCV`, the best hyperparameters were:
+
+* `C`: 10
+* `Solver`: linear
+
+It is fairly obvious than the following confusion matrix is almost identical to the previous one, given the marginal difference in performance:
+
+![Support Vector Machines Confusion Matrix](img/classical__svm_confusion_matrix.png)
+
+However, we should point out that the `C` hyperparameter dropped to 10 which means that the Regularization in this case is stronger. This means that we should be aware of possible overfitting on our data -- at least compared to Logistic Regression.
+
+#### 2.1.3 k Nearest Neighbors
+
+K Nearest Neighbors turned out to perform equally as well with the SVM model (79.5% accuracy). This was definitely a head-scratcher, although the Classification Report shows different values:
+
+SVM:
+|               | precision  | recall  | f1-score  | support  |
+|-------------: |----------: |-------: |---------: |--------: |
+|            0  |      0.81  |   0.81  |     0.81  |      94  |
+|            1  |      0.78  |   0.78  |     0.78  |      82  |
+|     accuracy  |            |         |     0.80  |     176  |
+|    macro avg  |      0.79  |   0.79  |     0.79  |     176  |
+| weighted avg  |      0.80  |   0.80  |     0.80  |     176  |
+
+KNN:
+|               | precision  | recall  | f1-score  | support  |
+|-------------: |----------: |-------: |---------: |--------: |
+|            0  |      0.78  |   0.86  |     0.82  |      94  |
+|            1  |      0.82  |   0.72  |     0.77  |      82  |
+|     accuracy  |            |         |     0.80  |     176  |
+|    macro avg  |      0.80  |   0.79  |     0.79  |     176  |
+| weighted avg  |      0.80  |   0.80  |     0.79  |     176  |
+
+As far as the kNN model is concerned, the best estimator is `n_neighbors = 3`.
+
